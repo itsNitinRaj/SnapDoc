@@ -14,11 +14,11 @@ import pytz
 SCREENSHOT_FOLDER = os.path.expanduser("~/Pictures/Screenshots")
 
 # Path to the Tesseract executable (update if needed)
-PYTESSERACT_CMD = r"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"  # Windows
+PYTESSERACT_CMD = r"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"  # For Windows, This step is crucial. Download tesseract from installer (not git repo) amd make sure the path is correct.
 pytesseract.pytesseract.tesseract_cmd = PYTESSERACT_CMD
 
 # Database configuration
-DB_PATH = os.path.expanduser("ss_doc.db")
+DB_PATH = os.path.expanduser("database.db")
 engine = create_engine(f"sqlite:///{DB_PATH}")
 Base = declarative_base()
 Session = sessionmaker(bind=engine)

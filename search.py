@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # Database configuration
-DB_PATH = os.path.expanduser("ss_doc.db")
+DB_PATH = os.path.expanduser("database.db")
 engine = create_engine(f"sqlite:///{DB_PATH}")
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
@@ -32,9 +32,9 @@ def initialize_database():
 def search_database(query):
     """Search for screenshots containing the query string."""
     try:
-        print(query)
+        # print(query)
         results = session.query(Screenshot).filter(Screenshot.text.like(f"%{query}%")).all()
-        print(results)
+        # print(results)
         return results
     except Exception as e:
         print(f"Error during search: {e}")
@@ -50,15 +50,20 @@ def display_search_results(results):
     print("\nSearch Results:")
     print("=" * 50)
     for result in results:
+        file_path = f"C:\\Users\\Nitin\\Pictures\\Screenshots\\{result.file_name}"
+        clickable_link = f"\033]8;;file:///{file_path}\033\\{file_path}\033]8;;\033\\"
+        print(f"Reference: {clickable_link}")
         print(f"File Name: {result.file_name}")
         print(f"Text Snippet: {result.text[:100]}")  # Display the first 100 characters
         print(f"Timestamp: {result.timestamp}")
         print("-" * 50)
 
 
+
+
 def start_search_interface():
     """Start the search CLI."""
-    print("Welcome to Screenshot Search!")
+    print("Hi there!")
     while True:
         query = input("\nEnter search text (or type 'exit' to quit): ").strip()
         if query.lower() == "exit":

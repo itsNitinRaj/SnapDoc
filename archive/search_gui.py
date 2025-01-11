@@ -1,3 +1,5 @@
+### MONITORING SCREENSHOTS || APPLYING OCR || SAVING IT IN DATABASE ###
+
 import os
 from tkinter import Tk, Label, Entry, Button, Text, Scrollbar, VERTICAL, END, Frame
 from tkinter.messagebox import showerror
