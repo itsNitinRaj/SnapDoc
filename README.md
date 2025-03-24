@@ -39,7 +39,7 @@ pip install -r requirements.txt
 ## Usage
 
 ### Starting SnapDoc (Monitoring Screenshots)
-- **Windows:** Double-click `start.bat` to launch SnapLog in the background.
+- **Windows:** Double-click `start.bat` to launch SnapDoc in the background.
 - **Linux/Mac:** Run:  
   ```bash
   python main.py
@@ -69,5 +69,5 @@ SnapDoc/
 ```
 
 ## Contributing
-Want to improve SnapLog? Feel free to fork the repo, open issues, and submit pull requests! 🚀
+Want to improve SnapDoc? Feel free to fork the repo, open issues, and submit pull requests! 🚀
 
