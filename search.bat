@@ -1,5 +1,5 @@
 @echo off
-REM Change to the folder containing the script
+REM Change to the folder containing the script !!!
 cd /d "D:\fun-zone\my-project\ss-document"
 
 REM Activate the virtual environment
