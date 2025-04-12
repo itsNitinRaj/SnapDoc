@@ -9,21 +9,24 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import time
 import pytz
+from dotenv import load_dotenv
 
-# Path to monitor (update this to your screenshot folder)
-SCREENSHOT_FOLDER = os.path.expanduser("~/Pictures/Screenshots")
+# Load environment variables from .env file
+load_dotenv()
 
-# Path to the Tesseract executable (update if needed)
-PYTESSERACT_CMD = r"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"  # For Windows, This step is crucial. Download tesseract from installer (not git repo) amd make sure the path is correct.
-pytesseract.pytesseract.tesseract_cmd = PYTESSERACT_CMD
+# Path to monitor
+SCREENSHOT_FOLDER = os.getenv("SCREENSHOT_FOLDER")
 
-# Database configuration
-DB_PATH = os.path.expanduser("database.db")
-engine = create_engine(f"sqlite:///{DB_PATH}")
+# Path to the Tesseract executable from .env
+TESSERACT_PATH = os.getenv("TESSERACT_PATH", "C:/Program Files/Tesseract-OCR/tesseract.exe")
+pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
+
+# Database configuration from .env
+DATABASE_NAME = os.getenv("DATABASE_NAME", "database.db")
+engine = create_engine(f"sqlite:///{DATABASE_NAME}")
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 session = Session()
-
 
 # Define the IST timezone
 IST = pytz.timezone('Asia/Kolkata')
@@ -43,7 +46,7 @@ class Screenshot(Base):
 def initialize_database():
     """Create database tables if they don't exist."""
     Base.metadata.create_all(engine)
-    print(f"Database initialized at {DB_PATH}")
+    print(f"Database initialized at {DATABASE_NAME}")
 
 
 class ImageFileHandler(FileSystemEventHandler):

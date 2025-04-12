@@ -3,3 +3,5 @@
 archive
 database.db
 integrate_sdk
+config.py
+.env

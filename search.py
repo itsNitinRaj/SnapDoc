@@ -3,10 +3,17 @@ from datetime import datetime
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from dotenv import load_dotenv
 
-# Database configuration
-DB_PATH = os.path.expanduser("database.db")
-engine = create_engine(f"sqlite:///{DB_PATH}")
+# Load environment variables from .env file
+load_dotenv()
+
+# Path to monitor
+SCREENSHOT_FOLDER = os.getenv("SCREENSHOT_FOLDER")
+
+# Database configuration from .env
+DATABASE_NAME = os.getenv("DATABASE_NAME", "database.db")
+engine = create_engine(f"sqlite:///{DATABASE_NAME}")
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -32,9 +39,7 @@ def initialize_database():
 def search_database(query):
     """Search for screenshots containing the query string."""
     try:
-        # print(query)
         results = session.query(Screenshot).filter(Screenshot.text.like(f"%{query}%")).all()
-        # print(results)
         return results
     except Exception as e:
         print(f"Error during search: {e}")
@@ -50,15 +55,13 @@ def display_search_results(results):
     print("\nSearch Results:")
     print("=" * 50)
     for result in results:
-        file_path = f"C:\\Users\\Nitin\\Pictures\\Screenshots\\{result.file_name}"
+        file_path = os.path.join(os.path.expanduser(SCREENSHOT_FOLDER), result.file_name)
         clickable_link = f"\033]8;;file:///{file_path}\033\\{file_path}\033]8;;\033\\"
         print(f"Reference: {clickable_link}")
         print(f"File Name: {result.file_name}")
         print(f"Text Snippet: {result.text[:100]}")  # Display the first 100 characters
         print(f"Timestamp: {result.timestamp}")
         print("-" * 50)
-
-
 
 
 def start_search_interface():

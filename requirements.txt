@@ -6,6 +6,7 @@ packaging==24.2
 pillow==11.1.0
 pytesseract==0.3.13
 pytz==2024.2
+python-dotenv
 six==1.17.0
 SQLAlchemy==2.0.36
 sqlparse==0.5.3
