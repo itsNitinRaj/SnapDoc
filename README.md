@@ -26,7 +26,7 @@ pip install -r requirements.txt
 ```
 
 ### 3. Install Tesseract OCR (Required for Text Extraction)
-- **Windows:** [Download here]([https://github.com/UB-Mannheim/tesseract/wiki](https://tesseract-ocr.github.io/tessdoc/Downloads))  
+- **Windows:** [Download here](https://tesseract-ocr.github.io/tessdoc/Downloads) 
 - **Linux (Ubuntu/Debian):**  
   ```bash
   sudo apt install tesseract-ocr
